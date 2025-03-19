@@ -1,0 +1,38 @@
+{
+    "myProfile": {
+        "id": 0,
+        "name": "Dr. Foo Bar",
+        "dept": "Department of Computer Science",
+        "desc": "Researching how to build an application which shall make finding other professors to collaborate with easier.",
+        "papers": [
+            { "id": 0, "title": "Creating an App to Ensure Inter-Departmental Collaboration" },
+            { "id": 1, "title": "Some Other Academic Paper" }
+        ]
+    },
+    "professors": [
+        {
+            "id": 1,
+            "name": "Dr. Biz Baz",
+            "dept": "Department of Computer Science",
+            "desc": "Focused on finding methods by which inter-departmental collaboration may be acheived.",
+            "papers": [
+                { "id": 0, "title": "Creating an App to Ensure Inter-Departmental Collaboration" },
+                { "id": 1, "title": "Some Other Academic Paper" }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Dr. John Doe",
+            "dept": "Department of Natural Sciences",
+            "desc": "Lorem ipsum...",
+            "papers": []
+        },
+        {
+            "id": 3,
+            "name": "Dr. Jane Doe",
+            "dept": "Department of Business",
+            "desc": "Lorem ipsum...",
+            "papers": []
+        }
+    ]
+}

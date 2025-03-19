@@ -20,7 +20,7 @@ struct ContactInfoView: View {
 
             Divider()
 
-            Text("📧 Email: \(professor.name.lowercased().replacingOccurrences(of: \" \", with: \".\"))@university.edu")
+            Text("📧 Email:@university.edu")
                 .font(.body)
                 .foregroundColor(.blue)
                 .padding(.horizontal)

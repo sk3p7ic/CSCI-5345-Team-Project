@@ -23,7 +23,7 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                // ✅ Stylish Navigation Bar
+                // Navigation Bar
                 HStack {
                     Text("ScholarSync")
                         .font(.largeTitle.bold())
@@ -41,7 +41,7 @@ struct ContentView: View {
                             .foregroundColor(.blue)
                     }
 
-                    // Logout Button (Now an Icon)
+                    // Logout
                     Button(action: {
                         withAnimation {
                             isLoggedIn = false
@@ -56,7 +56,7 @@ struct ContentView: View {
                 .padding()
                 .background(Color.white.shadow(radius: 2))
 
-                // ✅ Modern Search Bar
+                //  Search Bar
                 TextField("🔍 Search professors, departments, or research papers...", text: $searchText)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
@@ -65,7 +65,7 @@ struct ContentView: View {
                     .shadow(radius: 2)
                     .padding(.horizontal)
 
-                // ✅ Stylish Professor List with Cards
+                //  Professor List with Cards
                 ScrollView {
                     LazyVStack(spacing: 15) {
                         if filteredProfessors.isEmpty {

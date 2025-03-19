@@ -3,7 +3,7 @@
 //  ScholarSync
 //
 //  Created by Joshua Ibrom on 3/18/25.
-//import SwiftUI
+import SwiftUI
 
 struct ProfessorView: View {
     var professor: Professor

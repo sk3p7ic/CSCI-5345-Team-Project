@@ -89,12 +89,15 @@ struct ContentView: View {
                                             Text(professor.name)
                                                 .font(.headline)
                                                 .foregroundColor(.black)
+                                                .multilineTextAlignment(.leading)
                                             Text(professor.dept)
                                                 .font(.subheadline)
                                                 .foregroundColor(.blue)
+                                                .multilineTextAlignment(.leading)
                                             Text(professor.desc)
                                                 .foregroundColor(.secondary)
                                                 .lineLimit(2)
+                                                .multilineTextAlignment(.leading)
                                         }
                                         Spacer()
                                     }

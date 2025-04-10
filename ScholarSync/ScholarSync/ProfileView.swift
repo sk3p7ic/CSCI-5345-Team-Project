@@ -22,6 +22,10 @@ struct ProfileView: View {
                     Text(profile.dept)
                         .font(.title2)
                         .foregroundColor(.gray)
+                    
+                    Text(profile.desc)
+                        .font(.subheadline)
+                        .foregroundStyle(.primary)
                 }
                 .padding(.bottom, 20)
 

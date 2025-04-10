@@ -4,7 +4,7 @@ struct ContentView: View {
     @AppStorage("isLoggedIn") private var isLoggedIn: Bool = false
     @State private var showProfileSheet = false
     @State private var searchText = ""
-    let profile = testData.myProfile
+    let profile = myProfile
     let professors = testData.professors
 
     var filteredProfessors: [Professor] {
@@ -89,12 +89,15 @@ struct ContentView: View {
                                             Text(professor.name)
                                                 .font(.headline)
                                                 .foregroundColor(.black)
+                                                .multilineTextAlignment(.leading)
                                             Text(professor.dept)
                                                 .font(.subheadline)
                                                 .foregroundColor(.blue)
+                                                .multilineTextAlignment(.leading)
                                             Text(professor.desc)
                                                 .foregroundColor(.secondary)
                                                 .lineLimit(2)
+                                                .multilineTextAlignment(.leading)
                                         }
                                         Spacer()
                                     }

@@ -1,17 +1,18 @@
 {
-    "myProfile": {
-        "id": 0,
-        "name": "Dr. Foo Bar",
-        "dept": "Department of Computer Science",
-        "desc": "Specializing in AI-driven research discovery.",
-        "papers": [
-            { "id": 0, "title": "Machine Learning for Research Discovery" },
-            { "id": 1, "title": "AI in Academic Collaboration" },
-            { "id": 2, "title": "Semantic Search in Research Papers" },
-            { "id": 3, "title": "Deep Learning for Text Classification" }
-        ]
-    },
+    "myProfileIdx": 0,
     "professors": [
+        {
+            "id": 0,
+            "name": "Dr. Foo Bar",
+            "dept": "Department of Computer Science",
+            "desc": "Specializing in AI-driven research discovery.",
+            "papers": [
+                { "id": 0, "title": "Machine Learning for Research Discovery" },
+                { "id": 1, "title": "AI in Academic Collaboration" },
+                { "id": 2, "title": "Semantic Search in Research Papers" },
+                { "id": 3, "title": "Deep Learning for Text Classification" }
+            ]
+        },
         {
             "id": 1,
             "name": "Dr. Alice Johnson",

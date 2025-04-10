@@ -20,12 +20,13 @@ struct Professor: Hashable, Codable, Identifiable {
 }
 
 struct JSONDataFormat: Hashable, Codable {
-    var myProfile: Professor
+    var myProfileIdx: Int
     var professors: [Professor]
 }
 
 // Load data initially
 var testData: JSONDataFormat = load("data.json")
+var myProfile = testData.professors[testData.myProfileIdx]
 
 func load<T: Decodable>(_ filename: String) -> T {
     let data: Data

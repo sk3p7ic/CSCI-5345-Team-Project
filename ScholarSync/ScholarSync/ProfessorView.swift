@@ -14,6 +14,13 @@ struct ProfessorView: View {
             // Professor Header
             HStack {
                 VStack(alignment: .leading) {
+                    Image(systemName: "person.fill")
+                        .resizable()
+                        .frame(width: 72, height: 72)
+                        .foregroundColor(.white)
+                        .background(Color.blue)
+                        .clipShape(Circle())
+                        .padding(.leading, 10)
                     Text(professor.name)
                         .font(.title.bold())
 
@@ -24,7 +31,6 @@ struct ProfessorView: View {
                     Text(professor.desc)
                         .foregroundColor(.secondary)
                 }
-                Spacer()
             }
             .padding()
 
@@ -86,5 +92,5 @@ struct ProfessorView: View {
 }
 
 #Preview {
-    ProfessorView(professor: testData.myProfile)
+    ProfessorView(professor: myProfile)
 }

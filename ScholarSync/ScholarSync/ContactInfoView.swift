@@ -51,5 +51,5 @@ struct ContactInfoView: View {
 }
 
 #Preview {
-    ContactInfoView(professor: testData.myProfile)
+    ContactInfoView(professor: myProfile)
 }

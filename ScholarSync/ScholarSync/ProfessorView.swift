@@ -92,5 +92,5 @@ struct ProfessorView: View {
 }
 
 #Preview {
-    ProfessorView(professor: testData.myProfile)
+    ProfessorView(professor: myProfile)
 }

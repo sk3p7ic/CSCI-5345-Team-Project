@@ -4,7 +4,7 @@ struct ContentView: View {
     @AppStorage("isLoggedIn") private var isLoggedIn: Bool = false
     @State private var showProfileSheet = false
     @State private var searchText = ""
-    let profile = testData.myProfile
+    let profile = myProfile
     let professors = testData.professors
 
     var filteredProfessors: [Professor] {

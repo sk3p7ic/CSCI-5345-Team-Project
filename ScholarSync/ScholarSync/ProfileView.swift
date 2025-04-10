@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ProfileView: View {
-    @State private var profile = testData.myProfile
+    @State private var profile = myProfile
     @State private var newPaperTitle = ""
 
     var body: some View {
@@ -112,7 +112,7 @@ struct ProfileView: View {
 
     // Save Changes to JSON
     func saveProfile() {
-        testData.myProfile = profile
+        myProfile = profile
     }
 }
 

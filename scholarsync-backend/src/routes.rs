@@ -1,14 +1,13 @@
-use std::sync::{PoisonError, RwLock};
+use std::sync::RwLock;
 
+use crate::dataset::{Dataset, Paper};
 use actix_web::{
-    web::{Data, Path as WebPath, Json}, HttpResponse
+    HttpResponse,
+    web::{Data, Json, Path as WebPath},
 };
 use serde::Deserialize;
-use crate::dataset::{Dataset, Paper};
-
 
 pub type RouteHandlerData = Data<RwLock<Dataset>>;
-
 
 /// Returns a JSON list of all stored `Professor`s.
 #[actix_web::get("/api/professors")]
@@ -47,11 +46,15 @@ pub async fn get_professor(params: WebPath<(u32,)>, data: RouteHandlerData) -> H
 
 #[derive(Deserialize)]
 struct EditProfessorDescriptionProps {
-    desc: String
+    desc: String,
 }
 
 #[actix_web::post("/api/professors/{prof_id}/editDesc")]
-pub async fn edit_professor_desc(params: WebPath<(u32,)>, form_body: Json<EditProfessorDescriptionProps>, data: RouteHandlerData) -> HttpResponse {
+pub async fn edit_professor_desc(
+    params: WebPath<(u32,)>,
+    form_body: Json<EditProfessorDescriptionProps>,
+    data: RouteHandlerData,
+) -> HttpResponse {
     let (prof_id,) = params.into_inner();
     match data.write() {
         Ok(mut data) => {
@@ -75,13 +78,20 @@ struct AddPaperProps {
 }
 
 #[actix_web::post("/api/professors/{prof_id}/addPaper")]
-pub async fn add_paper(params: WebPath<(u32,)>, form_body: Json<AddPaperProps>, data: RouteHandlerData) -> HttpResponse {
+pub async fn add_paper(
+    params: WebPath<(u32,)>,
+    form_body: Json<AddPaperProps>,
+    data: RouteHandlerData,
+) -> HttpResponse {
     let (prof_id,) = params.into_inner();
     match data.write() {
         Ok(mut data) => {
             if let Some(professor) = data.get_mut(&prof_id) {
                 let next_id = professor.papers.iter().map(|p| p.id).max().unwrap_or(0) + 1;
-                professor.papers.push(Paper {id: next_id, title: form_body.title.to_owned()});
+                professor.papers.push(Paper {
+                    id: next_id,
+                    title: form_body.title.to_owned(),
+                });
                 HttpResponse::Ok().json(professor)
             } else {
                 HttpResponse::BadRequest().body("Professor not found.")

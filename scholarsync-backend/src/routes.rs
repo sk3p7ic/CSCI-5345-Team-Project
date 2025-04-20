@@ -1,6 +1,6 @@
 use std::sync::RwLock;
 
-use crate::dataset::{Dataset, Paper};
+use crate::dataset::{Dataset, Paper, Professor};
 use actix_web::{
     HttpResponse,
     web::{Data, Json, Path as WebPath},
@@ -21,6 +21,43 @@ pub async fn get_all_professors(data: RouteHandlerData) -> HttpResponse {
         Err(err) => {
             eprintln!("Error with RwLock (poisoned?): {err}");
             HttpResponse::InternalServerError().body("Could not get list of professors.")
+        }
+    }
+}
+
+#[derive(Deserialize)]
+struct AddProfessorProps {
+    name: String,
+    dept: String,
+    desc: String,
+}
+
+#[actix_web::post("/api/professors")]
+pub async fn add_professor(
+    form_body: Json<AddProfessorProps>,
+    data: RouteHandlerData,
+) -> HttpResponse {
+    match data.write() {
+        Ok(mut data) => {
+            let props = form_body.into_inner();
+            let next_id: u32 = {
+                let mut professors = data.values().collect::<Vec<_>>();
+                professors.sort_by_key(|p| p.id);
+                professors.into_iter().map(|p| p.id).last().unwrap_or(0) + 1
+            };
+            let professor = Professor {
+                id: next_id,
+                name: props.name,
+                dept: props.dept,
+                desc: props.desc,
+                papers: Vec::new(),
+            };
+            data.insert(next_id, professor.clone());
+            HttpResponse::Ok().json(professor)
+        }
+        Err(err) => {
+            eprintln!("Error with RwLock (poisoned?): {err}");
+            HttpResponse::InternalServerError().body("Could not add professor.")
         }
     }
 }
@@ -76,6 +113,24 @@ pub async fn edit_professor(
     }
 }
 
+#[actix_web::get("/api/professors/{prof_id}/papers")]
+pub async fn get_papers(params: WebPath<(u32,)>, data: RouteHandlerData) -> HttpResponse {
+    let (prof_id,) = params.into_inner();
+    match data.read() {
+        Ok(data) => {
+            if let Some(professor) = data.get(&prof_id) {
+                HttpResponse::Ok().json(professor.papers.clone())
+            } else {
+                HttpResponse::NotFound().body("Professor not found.")
+            }
+        }
+        Err(err) => {
+            eprintln!("Error with RwLock (poisoned?): {err}");
+            HttpResponse::InternalServerError().body("Could not get papers.")
+        }
+    }
+}
+
 #[derive(Deserialize)]
 struct AddPaperProps {
     title: String,
@@ -96,7 +151,10 @@ pub async fn add_paper(
                     id: next_id,
                     title: form_body.title.to_owned(),
                 });
-                HttpResponse::Ok().json(professor)
+                match professor.papers.iter().last() {
+                    Some(paper) => HttpResponse::Ok().json(paper),
+                    None => HttpResponse::InternalServerError().body("Could not get added paper."),
+                }
             } else {
                 HttpResponse::BadRequest().body("Professor not found.")
             }
@@ -129,7 +187,7 @@ pub async fn edit_paper(
                     .find(|p| p.id.clone() == paper_id)
                 {
                     paper.title = form_body.title.to_owned();
-                    HttpResponse::Ok().json(professor)
+                    HttpResponse::Ok().json(paper)
                 } else {
                     HttpResponse::NotFound().body("Paper not found.")
                 }

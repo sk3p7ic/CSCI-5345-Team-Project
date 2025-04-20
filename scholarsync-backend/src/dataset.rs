@@ -3,14 +3,14 @@ use std::collections::HashMap;
 use serde::{Deserialize, Serialize};
 
 /// Contains information about a `Paper` authored by a `Professor`.
-#[derive(Deserialize, Serialize)]
+#[derive(Deserialize, Serialize, Clone)]
 pub struct Paper {
     pub id: u32,
     pub title: String,
 }
 
 /// Contains information about a `Professor`.
-#[derive(Deserialize, Serialize)]
+#[derive(Deserialize, Serialize, Clone)]
 pub struct Professor {
     pub id: u32,
     pub name: String,

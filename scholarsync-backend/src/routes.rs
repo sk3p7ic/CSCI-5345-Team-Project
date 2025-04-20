@@ -45,20 +45,24 @@ pub async fn get_professor(params: WebPath<(u32,)>, data: RouteHandlerData) -> H
 }
 
 #[derive(Deserialize)]
-struct EditProfessorDescriptionProps {
+struct EditProfessorProps {
+    name: String,
+    dept: String,
     desc: String,
 }
 
-#[actix_web::post("/api/professors/{prof_id}/editDesc")]
-pub async fn edit_professor_desc(
+#[actix_web::put("/api/professors/{prof_id}")]
+pub async fn edit_professor(
     params: WebPath<(u32,)>,
-    form_body: Json<EditProfessorDescriptionProps>,
+    form_body: Json<EditProfessorProps>,
     data: RouteHandlerData,
 ) -> HttpResponse {
     let (prof_id,) = params.into_inner();
     match data.write() {
         Ok(mut data) => {
             if let Some(professor) = data.get_mut(&prof_id) {
+                professor.name = form_body.name.to_owned();
+                professor.dept = form_body.dept.to_owned();
                 professor.desc = form_body.desc.to_owned();
                 HttpResponse::Ok().json(professor)
             } else {
@@ -67,7 +71,7 @@ pub async fn edit_professor_desc(
         }
         Err(err) => {
             eprintln!("Error with RwLock (poisoned?): {err}");
-            HttpResponse::InternalServerError().body("Could not edit professor description.")
+            HttpResponse::InternalServerError().body("Could not edit professor.")
         }
     }
 }
@@ -77,7 +81,7 @@ struct AddPaperProps {
     title: String,
 }
 
-#[actix_web::post("/api/professors/{prof_id}/addPaper")]
+#[actix_web::post("/api/professors/{prof_id}/papers")]
 pub async fn add_paper(
     params: WebPath<(u32,)>,
     form_body: Json<AddPaperProps>,
@@ -100,6 +104,42 @@ pub async fn add_paper(
         Err(err) => {
             eprintln!("Error with RwLock (poisoned?): {err}");
             HttpResponse::InternalServerError().body("Could not add paper.")
+        }
+    }
+}
+
+#[derive(Deserialize)]
+struct EditPaperProps {
+    title: String,
+}
+
+#[actix_web::put("/api/professors/{prof_id}/papers/{paper_id}")]
+pub async fn edit_paper(
+    params: WebPath<(u32, u32)>,
+    form_body: Json<EditPaperProps>,
+    data: RouteHandlerData,
+) -> HttpResponse {
+    let (prof_id, paper_id) = params.into_inner();
+    match data.write() {
+        Ok(mut data) => {
+            if let Some(professor) = data.get_mut(&prof_id) {
+                if let Some(paper) = professor
+                    .papers
+                    .iter_mut()
+                    .find(|p| p.id.clone() == paper_id)
+                {
+                    paper.title = form_body.title.to_owned();
+                    HttpResponse::Ok().json(professor)
+                } else {
+                    HttpResponse::NotFound().body("Paper not found.")
+                }
+            } else {
+                HttpResponse::NotFound().body("Professor not found.")
+            }
+        }
+        Err(err) => {
+            eprintln!("Error with RwLock (poisoned?): {err}");
+            HttpResponse::InternalServerError().body("Could not edit paper.")
         }
     }
 }

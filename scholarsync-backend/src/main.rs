@@ -1,11 +1,10 @@
 use std::sync::RwLock;
 
 use actix_web::{App, HttpServer, web::Data};
-use routes::{add_paper, edit_professor_desc, get_all_professors, get_professor, RouteHandlerData};
+use routes::{RouteHandlerData, add_paper, edit_professor, get_all_professors, get_professor};
 
 mod dataset;
 mod routes;
-
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
@@ -16,7 +15,7 @@ async fn main() -> std::io::Result<()> {
             .app_data(data.clone())
             .service(get_all_professors)
             .service(get_professor)
-            .service(edit_professor_desc)
+            .service(edit_professor)
             .service(add_paper)
     })
     .bind(("0.0.0.0", 8080))?

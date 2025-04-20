@@ -20,7 +20,7 @@ pub struct Professor {
 }
 
 /// Stores `Professor`s, indexed by each of their IDs.
-pub type Dataset = HashMap<u32, Professor>;
+pub struct Dataset(pub HashMap<u32, Professor>);
 
 /// Loads a given JSON dataset found under `path` into a HashMap.
 ///
@@ -29,9 +29,10 @@ pub type Dataset = HashMap<u32, Professor>;
 /// data cannot be parsed to a `Dataset`.
 pub fn load_dataset(path: &'static str) -> Dataset {
     let data = std::fs::read_to_string(path).expect("Dataset file must exist");
-    serde_json::from_str::<Vec<Professor>>(data.as_str())
+    let data_map = serde_json::from_str::<Vec<Professor>>(data.as_str())
         .expect("Input data must be parsable as a list of Professors")
         .into_iter()
         .map(|prof| (prof.id, prof))
-        .collect()
+        .collect();
+    Dataset(data_map)
 }

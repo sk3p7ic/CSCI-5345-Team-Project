@@ -14,7 +14,7 @@ pub type RouteHandlerData = Data<RwLock<Dataset>>;
 pub async fn get_all_professors(data: RouteHandlerData) -> HttpResponse {
     match data.read() {
         Ok(data) => {
-            let mut professors = data.values().collect::<Vec<_>>();
+            let mut professors = data.0.values().collect::<Vec<_>>();
             professors.sort_by_key(|p| p.id);
             HttpResponse::Ok().json(professors)
         }
@@ -41,7 +41,7 @@ pub async fn add_professor(
         Ok(mut data) => {
             let props = form_body.into_inner();
             let next_id: u32 = {
-                let mut professors = data.values().collect::<Vec<_>>();
+                let mut professors = data.0.values().collect::<Vec<_>>();
                 professors.sort_by_key(|p| p.id);
                 professors.into_iter().map(|p| p.id).last().unwrap_or(0) + 1
             };
@@ -52,7 +52,7 @@ pub async fn add_professor(
                 desc: props.desc,
                 papers: Vec::new(),
             };
-            data.insert(next_id, professor.clone());
+            data.0.insert(next_id, professor.clone());
             HttpResponse::Ok().json(professor)
         }
         Err(err) => {
@@ -68,7 +68,7 @@ pub async fn get_professor(params: WebPath<(u32,)>, data: RouteHandlerData) -> H
     let (prof_id,) = params.into_inner();
     match data.read() {
         Ok(data) => {
-            if let Some(professor) = data.get(&prof_id) {
+            if let Some(professor) = data.0.get(&prof_id) {
                 HttpResponse::Ok().json(professor)
             } else {
                 HttpResponse::NotFound().body("Professor not found.")
@@ -97,7 +97,7 @@ pub async fn edit_professor(
     let (prof_id,) = params.into_inner();
     match data.write() {
         Ok(mut data) => {
-            if let Some(professor) = data.get_mut(&prof_id) {
+            if let Some(professor) = data.0.get_mut(&prof_id) {
                 professor.name = form_body.name.to_owned();
                 professor.dept = form_body.dept.to_owned();
                 professor.desc = form_body.desc.to_owned();
@@ -118,7 +118,7 @@ pub async fn get_papers(params: WebPath<(u32,)>, data: RouteHandlerData) -> Http
     let (prof_id,) = params.into_inner();
     match data.read() {
         Ok(data) => {
-            if let Some(professor) = data.get(&prof_id) {
+            if let Some(professor) = data.0.get(&prof_id) {
                 HttpResponse::Ok().json(professor.papers.clone())
             } else {
                 HttpResponse::NotFound().body("Professor not found.")
@@ -145,7 +145,7 @@ pub async fn add_paper(
     let (prof_id,) = params.into_inner();
     match data.write() {
         Ok(mut data) => {
-            if let Some(professor) = data.get_mut(&prof_id) {
+            if let Some(professor) = data.0.get_mut(&prof_id) {
                 let next_id = professor.papers.iter().map(|p| p.id).max().unwrap_or(0) + 1;
                 professor.papers.push(Paper {
                     id: next_id,
@@ -180,7 +180,7 @@ pub async fn edit_paper(
     let (prof_id, paper_id) = params.into_inner();
     match data.write() {
         Ok(mut data) => {
-            if let Some(professor) = data.get_mut(&prof_id) {
+            if let Some(professor) = data.0.get_mut(&prof_id) {
                 if let Some(paper) = professor
                     .papers
                     .iter_mut()

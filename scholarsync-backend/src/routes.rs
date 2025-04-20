@@ -7,11 +7,11 @@ use actix_web::{
 };
 use serde::Deserialize;
 
-pub type RouteHandlerData = Data<RwLock<Dataset>>;
+pub type RouteHandlerData<'data> = Data<RwLock<Dataset<'data>>>;
 
 /// Returns a JSON list of all stored `Professor`s.
 #[actix_web::get("/api/professors")]
-pub async fn get_all_professors(data: RouteHandlerData) -> HttpResponse {
+pub async fn get_all_professors(data: RouteHandlerData<'static>) -> HttpResponse {
     match data.read() {
         Ok(data) => {
             let mut professors = data.0.values().collect::<Vec<_>>();
@@ -35,7 +35,7 @@ struct AddProfessorProps {
 #[actix_web::post("/api/professors")]
 pub async fn add_professor(
     form_body: Json<AddProfessorProps>,
-    data: RouteHandlerData,
+    data: RouteHandlerData<'static>,
 ) -> HttpResponse {
     match data.write() {
         Ok(mut data) => {
@@ -64,7 +64,10 @@ pub async fn add_professor(
 
 /// Returns a `Professor` with a given `prof_id`, if existent.
 #[actix_web::get("/api/professors/{prof_id}")]
-pub async fn get_professor(params: WebPath<(u32,)>, data: RouteHandlerData) -> HttpResponse {
+pub async fn get_professor(
+    params: WebPath<(u32,)>,
+    data: RouteHandlerData<'static>,
+) -> HttpResponse {
     let (prof_id,) = params.into_inner();
     match data.read() {
         Ok(data) => {
@@ -92,7 +95,7 @@ struct EditProfessorProps {
 pub async fn edit_professor(
     params: WebPath<(u32,)>,
     form_body: Json<EditProfessorProps>,
-    data: RouteHandlerData,
+    data: RouteHandlerData<'static>,
 ) -> HttpResponse {
     let (prof_id,) = params.into_inner();
     match data.write() {
@@ -114,7 +117,7 @@ pub async fn edit_professor(
 }
 
 #[actix_web::get("/api/professors/{prof_id}/papers")]
-pub async fn get_papers(params: WebPath<(u32,)>, data: RouteHandlerData) -> HttpResponse {
+pub async fn get_papers(params: WebPath<(u32,)>, data: RouteHandlerData<'static>) -> HttpResponse {
     let (prof_id,) = params.into_inner();
     match data.read() {
         Ok(data) => {
@@ -140,7 +143,7 @@ struct AddPaperProps {
 pub async fn add_paper(
     params: WebPath<(u32,)>,
     form_body: Json<AddPaperProps>,
-    data: RouteHandlerData,
+    data: RouteHandlerData<'static>,
 ) -> HttpResponse {
     let (prof_id,) = params.into_inner();
     match data.write() {
@@ -175,7 +178,7 @@ struct EditPaperProps {
 pub async fn edit_paper(
     params: WebPath<(u32, u32)>,
     form_body: Json<EditPaperProps>,
-    data: RouteHandlerData,
+    data: RouteHandlerData<'static>,
 ) -> HttpResponse {
     let (prof_id, paper_id) = params.into_inner();
     match data.write() {

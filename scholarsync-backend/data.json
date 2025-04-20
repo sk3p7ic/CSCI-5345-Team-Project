@@ -1,134 +1,273 @@
 [
-    {
+  {
+    "id": 9,
+    "name": "Dr. Victoria Wilson",
+    "dept": "Department of Robotics",
+    "desc": "Building AI-powered robotic systems.",
+    "papers": [
+      {
         "id": 0,
-        "name": "Dr. Foo Bar",
-        "dept": "Department of Computer Science",
-        "desc": "Specializing in AI-driven research discovery.",
-        "papers": [
-            { "id": 0, "title": "Machine Learning for Research Discovery" },
-            { "id": 1, "title": "AI in Academic Collaboration" },
-            { "id": 2, "title": "Semantic Search in Research Papers" },
-            { "id": 3, "title": "Deep Learning for Text Classification" }
-        ]
-    },
-    {
+        "title": "Autonomous Robots and AI"
+      },
+      {
         "id": 1,
-        "name": "Dr. Alice Johnson",
-        "dept": "Department of AI",
-        "desc": "Exploring neural networks and their applications in academia.",
-        "papers": [
-            { "id": 0, "title": "Neural Networks for Academic Matching" },
-            { "id": 1, "title": "AI-powered Citation Analysis" },
-            { "id": 2, "title": "Automated Research Paper Summarization" },
-            { "id": 3, "title": "Transformers and Their Impact on NLP" }
-        ]
-    },
-    {
+        "title": "Reinforcement Learning in Robotics"
+      },
+      {
         "id": 2,
-        "name": "Dr. Michael Smith",
-        "dept": "Department of Natural Sciences",
-        "desc": "Genomics research using artificial intelligence.",
-        "papers": [
-            { "id": 0, "title": "Genomics Data Processing with AI" },
-            { "id": 1, "title": "Drug Discovery with Deep Learning" },
-            { "id": 2, "title": "AI for Climate Change Analysis" },
-            { "id": 3, "title": "Predicting Disease Outbreaks with Machine Learning" }
-        ]
-    },
-    {
+        "title": "Human-Robot Interaction with AI"
+      },
+      {
         "id": 3,
-        "name": "Dr. Olivia Brown",
-        "dept": "Department of Business",
-        "desc": "Studying AI's impact on market trends.",
-        "papers": [
-            { "id": 0, "title": "Machine Learning in Finance" },
-            { "id": 1, "title": "Predictive Analytics for Stock Markets" },
-            { "id": 2, "title": "AI and Consumer Behavior Trends" },
-            { "id": 3, "title": "Supply Chain Optimization with AI" }
-        ]
-    },
-    {
-        "id": 4,
-        "name": "Dr. Ethan Taylor",
-        "dept": "Department of Humanities",
-        "desc": "Investigating AI's role in creative industries.",
-        "papers": [
-            { "id": 0, "title": "Natural Language Processing in Literature" },
-            { "id": 1, "title": "AI and Human Creativity" },
-            { "id": 2, "title": "Automated Journalism and AI Ethics" },
-            { "id": 3, "title": "AI-generated Art and Copyright Issues" }
-        ]
-    },
-    {
-        "id": 5,
-        "name": "Dr. Sophia Martinez",
-        "dept": "Department of Physics",
-        "desc": "Using AI for quantum mechanics research.",
-        "papers": [
-            { "id": 0, "title": "Quantum Computing with AI" },
-            { "id": 1, "title": "Simulating Quantum Particles with Machine Learning" },
-            { "id": 2, "title": "AI and Particle Physics" },
-            { "id": 3, "title": "Superconductors and AI-based Prediction Models" }
-        ]
-    },
-    {
-        "id": 6,
-        "name": "Dr. William Anderson",
-        "dept": "Department of Medicine",
-        "desc": "Applying deep learning to medical imaging.",
-        "papers": [
-            { "id": 0, "title": "AI-assisted Cancer Detection in Radiology" },
-            { "id": 1, "title": "Deep Learning for Drug Development" },
-            { "id": 2, "title": "AI-powered Personalized Medicine" },
-            { "id": 3, "title": "Predicting Disease Progression with AI" }
-        ]
-    },
-    {
-        "id": 7,
-        "name": "Dr. Emily White",
-        "dept": "Department of Education",
-        "desc": "Using AI to enhance online learning experiences.",
-        "papers": [
-            { "id": 0, "title": "AI-powered Personalized Learning Platforms" },
-            { "id": 1, "title": "Using Chatbots in Online Education" },
-            { "id": 2, "title": "Machine Learning for Student Performance Prediction" },
-            { "id": 3, "title": "AI-driven Automated Grading Systems" }
-        ]
-    },
-    {
-        "id": 8,
-        "name": "Dr. Benjamin Carter",
-        "dept": "Department of Cybersecurity",
-        "desc": "AI applications in cybersecurity and threat detection.",
-        "papers": [
-            { "id": 0, "title": "Machine Learning for Cyber Threat Detection" },
-            { "id": 1, "title": "Deepfake Detection using AI" },
-            { "id": 2, "title": "AI-driven Phishing Detection" },
-            { "id": 3, "title": "Privacy-Preserving Machine Learning Models" }
-        ]
-    },
-    {
-        "id": 9,
-        "name": "Dr. Victoria Wilson",
-        "dept": "Department of Robotics",
-        "desc": "Building AI-powered robotic systems.",
-        "papers": [
-            { "id": 0, "title": "Autonomous Robots and AI" },
-            { "id": 1, "title": "Reinforcement Learning in Robotics" },
-            { "id": 2, "title": "Human-Robot Interaction with AI" },
-            { "id": 3, "title": "AI-driven Robotic Surgery" }
-        ]
-    },
-    {
-        "id": 10,
-        "name": "Dr. Daniel Harris",
-        "dept": "Department of Astronomy",
-        "desc": "Analyzing astronomical data using machine learning.",
-        "papers": [
-            { "id": 0, "title": "AI for Exoplanet Detection" },
-            { "id": 1, "title": "Neural Networks in Astronomical Image Analysis" },
-            { "id": 2, "title": "Predicting Cosmic Events with AI" },
-            { "id": 3, "title": "AI-powered Space Exploration" }
-        ]
-    }
+        "title": "AI-driven Robotic Surgery"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Dr. Sophia Martinez",
+    "dept": "Department of Physics",
+    "desc": "Using AI for quantum mechanics research.",
+    "papers": [
+      {
+        "id": 0,
+        "title": "Quantum Computing with AI"
+      },
+      {
+        "id": 1,
+        "title": "Simulating Quantum Particles with Machine Learning"
+      },
+      {
+        "id": 2,
+        "title": "AI and Particle Physics"
+      },
+      {
+        "id": 3,
+        "title": "Superconductors and AI-based Prediction Models"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Dr. Daniel Harris",
+    "dept": "Department of Astronomy",
+    "desc": "Analyzing astronomical data using machine learning.",
+    "papers": [
+      {
+        "id": 0,
+        "title": "AI for Exoplanet Detection"
+      },
+      {
+        "id": 1,
+        "title": "Neural Networks in Astronomical Image Analysis"
+      },
+      {
+        "id": 2,
+        "title": "Predicting Cosmic Events with AI"
+      },
+      {
+        "id": 3,
+        "title": "AI-powered Space Exploration"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Dr. Ethan Taylor",
+    "dept": "Department of Humanities",
+    "desc": "Investigating AI's role in creative industries.",
+    "papers": [
+      {
+        "id": 0,
+        "title": "Natural Language Processing in Literature"
+      },
+      {
+        "id": 1,
+        "title": "AI and Human Creativity"
+      },
+      {
+        "id": 2,
+        "title": "Automated Journalism and AI Ethics"
+      },
+      {
+        "id": 3,
+        "title": "AI-generated Art and Copyright Issues"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Dr. William Anderson",
+    "dept": "Department of Medicine",
+    "desc": "Applying deep learning to medical imaging.",
+    "papers": [
+      {
+        "id": 0,
+        "title": "AI-assisted Cancer Detection in Radiology"
+      },
+      {
+        "id": 1,
+        "title": "Deep Learning for Drug Development"
+      },
+      {
+        "id": 2,
+        "title": "AI-powered Personalized Medicine"
+      },
+      {
+        "id": 3,
+        "title": "Predicting Disease Progression with AI"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Dr. Benjamin Carter",
+    "dept": "Department of Cybersecurity",
+    "desc": "AI applications in cybersecurity and threat detection.",
+    "papers": [
+      {
+        "id": 0,
+        "title": "Machine Learning for Cyber Threat Detection"
+      },
+      {
+        "id": 1,
+        "title": "Deepfake Detection using AI"
+      },
+      {
+        "id": 2,
+        "title": "AI-driven Phishing Detection"
+      },
+      {
+        "id": 3,
+        "title": "Privacy-Preserving Machine Learning Models"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Dr. Emily White",
+    "dept": "Department of Education",
+    "desc": "Using AI to enhance online learning experiences.",
+    "papers": [
+      {
+        "id": 0,
+        "title": "AI-powered Personalized Learning Platforms"
+      },
+      {
+        "id": 1,
+        "title": "Using Chatbots in Online Education"
+      },
+      {
+        "id": 2,
+        "title": "Machine Learning for Student Performance Prediction"
+      },
+      {
+        "id": 3,
+        "title": "AI-driven Automated Grading Systems"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Dr. Michael Smith",
+    "dept": "Department of Natural Sciences",
+    "desc": "Genomics research using artificial intelligence.",
+    "papers": [
+      {
+        "id": 0,
+        "title": "Genomics Data Processing with AI"
+      },
+      {
+        "id": 1,
+        "title": "Drug Discovery with Deep Learning"
+      },
+      {
+        "id": 2,
+        "title": "AI for Climate Change Analysis"
+      },
+      {
+        "id": 3,
+        "title": "Predicting Disease Outbreaks with Machine Learning"
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "name": "Dr. Just Added",
+    "dept": "Testing Adds",
+    "desc": "Lorem ipsum.",
+    "papers": []
+  },
+  {
+    "id": 1,
+    "name": "Dr. Alice Johnson",
+    "dept": "Department of AI",
+    "desc": "Exploring neural networks and their applications in academia.",
+    "papers": [
+      {
+        "id": 0,
+        "title": "Neural Networks for Academic Matching"
+      },
+      {
+        "id": 1,
+        "title": "AI-powered Citation Analysis"
+      },
+      {
+        "id": 2,
+        "title": "Automated Research Paper Summarization"
+      },
+      {
+        "id": 3,
+        "title": "Transformers and Their Impact on NLP"
+      }
+    ]
+  },
+  {
+    "id": 0,
+    "name": "Dr. Foo Bar",
+    "dept": "Department of Computer Science",
+    "desc": "Specializing in AI-driven research discovery.",
+    "papers": [
+      {
+        "id": 0,
+        "title": "Machine Learning for Research Discovery"
+      },
+      {
+        "id": 1,
+        "title": "AI in Academic Collaboration"
+      },
+      {
+        "id": 2,
+        "title": "Semantic Search in Research Papers"
+      },
+      {
+        "id": 3,
+        "title": "Deep Learning for Text Classification"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Dr. Olivia Brown",
+    "dept": "Department of Business",
+    "desc": "Studying AI's impact on market trends.",
+    "papers": [
+      {
+        "id": 0,
+        "title": "Machine Learning in Finance"
+      },
+      {
+        "id": 1,
+        "title": "Predictive Analytics for Stock Markets"
+      },
+      {
+        "id": 2,
+        "title": "AI and Consumer Behavior Trends"
+      },
+      {
+        "id": 3,
+        "title": "Supply Chain Optimization with AI"
+      }
+    ]
+  }
 ]

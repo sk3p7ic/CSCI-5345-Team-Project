@@ -5,9 +5,20 @@ use actix_web::{
     HttpResponse,
     web::{Data, Json, Path as WebPath},
 };
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
 pub type RouteHandlerData<'data> = Data<RwLock<Dataset<'data>>>;
+
+#[derive(Serialize)]
+struct RouteResponseMessage {
+    message: &'static str,
+}
+
+impl std::convert::From<&'static str> for RouteResponseMessage {
+    fn from(value: &'static str) -> Self {
+        Self { message: value }
+    }
+}
 
 /// Returns a JSON list of all stored `Professor`s.
 #[actix_web::get("/api/professors")]
@@ -123,6 +134,33 @@ pub async fn edit_professor(
     }
 }
 
+#[actix_web::delete("/api/professors/{prof_id}")]
+pub async fn delete_professor(
+    params: WebPath<(u32,)>,
+    data: RouteHandlerData<'static>,
+) -> HttpResponse {
+    let (prof_id,) = params.into_inner();
+    match data.write() {
+        Ok(mut data) => {
+            if data.0.remove(&prof_id).is_none() {
+                return HttpResponse::NotFound().body("Professor not found.");
+            }
+            match data.save_state() {
+                Ok(_) => HttpResponse::NoContent().json(RouteResponseMessage::from(
+                    "Professor deleted successfully.",
+                )),
+                Err(_) => HttpResponse::Accepted().json(RouteResponseMessage::from(
+                    "Professor was deleted in memory, but the deletion has not been committed.",
+                )),
+            }
+        }
+        Err(err) => {
+            eprintln!("Error with RwLock (poisoned?): {err}");
+            HttpResponse::InternalServerError().body("Could not delete professor.")
+        }
+    }
+}
+
 #[actix_web::get("/api/professors/{prof_id}/papers")]
 pub async fn get_papers(params: WebPath<(u32,)>, data: RouteHandlerData<'static>) -> HttpResponse {
     let (prof_id,) = params.into_inner();
@@ -216,6 +254,46 @@ pub async fn edit_paper(
         Err(err) => {
             eprintln!("Error with RwLock (poisoned?): {err}");
             HttpResponse::InternalServerError().body("Could not edit paper.")
+        }
+    }
+}
+
+#[actix_web::delete("/api/professors/{prof_id}/papers/{paper_id}")]
+pub async fn delete_paper(
+    params: WebPath<(u32, u32)>,
+    data: RouteHandlerData<'static>,
+) -> HttpResponse {
+    let (prof_id, paper_id) = params.into_inner();
+    match data.write() {
+        Ok(mut data) => {
+            if let Some(professor) = data.0.get_mut(&prof_id) {
+                let idx = {
+                    let idx = professor
+                        .papers
+                        .iter()
+                        .enumerate()
+                        .find(|t| t.1.id == paper_id);
+                    if idx.is_none() {
+                        return HttpResponse::NotFound()
+                            .json(RouteResponseMessage::from("Paper not found."));
+                    }
+                    idx.expect("Paper must exist").0
+                };
+                professor.papers.remove(idx);
+                match data.save_state() {
+                    Ok(_) => HttpResponse::NoContent()
+                        .json(RouteResponseMessage::from("Paper deleted successfully.")),
+                    Err(_) => HttpResponse::Accepted().json(RouteResponseMessage::from(
+                        "Paper was deleted in memory, but the deletion has not been committed.",
+                    )),
+                }
+            } else {
+                HttpResponse::NotFound().body("Professor not found.")
+            }
+        }
+        Err(err) => {
+            eprintln!("Error with RwLock (poisoned?): {err}");
+            HttpResponse::InternalServerError().body("Could not delete paper.")
         }
     }
 }

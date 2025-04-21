@@ -53,6 +53,9 @@ pub async fn add_professor(
                 papers: Vec::new(),
             };
             data.0.insert(next_id, professor.clone());
+            if let Err(err) = data.save_state() {
+                eprintln!("Could not save data state: {err}");
+            }
             HttpResponse::Ok().json(professor)
         }
         Err(err) => {
@@ -104,7 +107,11 @@ pub async fn edit_professor(
                 professor.name = form_body.name.to_owned();
                 professor.dept = form_body.dept.to_owned();
                 professor.desc = form_body.desc.to_owned();
-                HttpResponse::Ok().json(professor)
+                let res = HttpResponse::Ok().json(professor);
+                if let Err(err) = data.save_state() {
+                    eprintln!("Could not save data state: {err}");
+                }
+                res
             } else {
                 HttpResponse::NotFound().body("Professor not found.")
             }
@@ -154,10 +161,14 @@ pub async fn add_paper(
                     id: next_id,
                     title: form_body.title.to_owned(),
                 });
-                match professor.papers.iter().last() {
+                let res = match professor.papers.iter().last() {
                     Some(paper) => HttpResponse::Ok().json(paper),
                     None => HttpResponse::InternalServerError().body("Could not get added paper."),
+                };
+                if let Err(err) = data.save_state() {
+                    eprintln!("Could not save data state: {err}");
                 }
+                res
             } else {
                 HttpResponse::BadRequest().body("Professor not found.")
             }
@@ -190,7 +201,11 @@ pub async fn edit_paper(
                     .find(|p| p.id.clone() == paper_id)
                 {
                     paper.title = form_body.title.to_owned();
-                    HttpResponse::Ok().json(paper)
+                    let res = HttpResponse::Ok().json(paper);
+                    if let Err(err) = data.save_state() {
+                        eprintln!("Could not save data state: {err}");
+                    }
+                    res
                 } else {
                     HttpResponse::NotFound().body("Paper not found.")
                 }

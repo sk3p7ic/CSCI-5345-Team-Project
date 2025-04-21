@@ -22,16 +22,13 @@ pub struct Professor {
 /// Stores `Professor`s, indexed by each of their IDs.
 pub struct Dataset<'data>(pub HashMap<u32, Professor>, &'data str);
 
-/// Create a `Drop` implementation to handle saving the current data (list of
-/// professors) to the filesystem upon exiting the program.
-impl<'data> Drop for Dataset<'data> {
-    fn drop(&mut self) {
+impl<'data> Dataset<'data> {
+    pub fn save_state(&self) -> Result<(), String> {
         let professors = self.0.values().collect::<Vec<_>>();
         let data = match serde_json::to_string_pretty(&professors) {
             Ok(data) => data,
             Err(e) => {
-                eprintln!("Cannot serialize data: {e}");
-                return;
+                return Err(format!("Cannot serialize data: {e}"));
             }
         };
         let mut file = match std::fs::OpenOptions::new()
@@ -41,15 +38,24 @@ impl<'data> Drop for Dataset<'data> {
         {
             Ok(f) => f,
             Err(e) => {
-                eprintln!("Cannot open dataset file to write: {e}");
-                return;
+                return Err(format!("Cannot open dataset file to write: {e}"));
             }
         };
         if let Err(e) = file.write_all(data.as_bytes()) {
-            eprintln!("Cannot write to dataset file: {e}");
-            return;
+            return Err(format!("Cannot write to dataset file: {e}"));
         }
         println!("Saved current data to '{path}'", path = self.1);
+        Ok(())
+    }
+}
+
+/// Create a `Drop` implementation to handle saving the current data (list of
+/// professors) to the filesystem upon exiting the program.
+impl<'data> Drop for Dataset<'data> {
+    fn drop(&mut self) {
+        if let Err(e) = self.save_state() {
+            eprintln!("Error Saving State: {e}");
+        }
     }
 }
 

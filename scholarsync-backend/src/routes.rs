@@ -153,9 +153,7 @@ pub async fn delete_professor(
                     .json(RouteResponseMessage::from("Professor not found."));
             }
             match data.save_state() {
-                Ok(_) => HttpResponse::NoContent().json(RouteResponseMessage::from(
-                    "Professor deleted successfully.",
-                )),
+                Ok(_) => HttpResponse::NoContent().finish(),
                 Err(_) => HttpResponse::Accepted().json(RouteResponseMessage::from(
                     "Professor was deleted in memory, but the deletion has not been committed.",
                 )),
@@ -293,8 +291,7 @@ pub async fn delete_paper(
                 };
                 professor.papers.remove(idx);
                 match data.save_state() {
-                    Ok(_) => HttpResponse::NoContent()
-                        .json(RouteResponseMessage::from("Paper deleted successfully.")),
+                    Ok(_) => HttpResponse::NoContent().finish(),
                     Err(_) => HttpResponse::Accepted().json(RouteResponseMessage::from(
                         "Paper was deleted in memory, but the deletion has not been committed.",
                     )),

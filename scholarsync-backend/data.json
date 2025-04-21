@@ -24,59 +24,59 @@
     ]
   },
   {
-    "id": 3,
-    "name": "Dr. Olivia Brown",
-    "dept": "Department of Business",
-    "desc": "Studying AI's impact on market trends.",
-    "papers": [
-      {
-        "id": 0,
-        "title": "Machine Learning in Finance"
-      },
-      {
-        "id": 1,
-        "title": "Predictive Analytics for Stock Markets"
-      },
-      {
-        "id": 2,
-        "title": "AI and Consumer Behavior Trends"
-      },
-      {
-        "id": 3,
-        "title": "Supply Chain Optimization with AI"
-      }
-    ]
-  },
-  {
-    "id": 6,
-    "name": "Dr. William Anderson",
-    "dept": "Department of Medicine",
-    "desc": "Applying deep learning to medical imaging.",
-    "papers": [
-      {
-        "id": 0,
-        "title": "AI-assisted Cancer Detection in Radiology"
-      },
-      {
-        "id": 1,
-        "title": "Deep Learning for Drug Development"
-      },
-      {
-        "id": 2,
-        "title": "AI-powered Personalized Medicine"
-      },
-      {
-        "id": 3,
-        "title": "Predicting Disease Progression with AI"
-      }
-    ]
-  },
-  {
     "id": 11,
     "name": "Dr. Just Added",
     "dept": "Testing Adds",
     "desc": "Lorem ipsum.",
     "papers": []
+  },
+  {
+    "id": 10,
+    "name": "Dr. Daniel Harris",
+    "dept": "Department of Astronomy",
+    "desc": "Analyzing astronomical data using machine learning.",
+    "papers": [
+      {
+        "id": 0,
+        "title": "AI for Exoplanet Detection"
+      },
+      {
+        "id": 1,
+        "title": "Neural Networks in Astronomical Image Analysis"
+      },
+      {
+        "id": 2,
+        "title": "Predicting Cosmic Events with AI"
+      },
+      {
+        "id": 3,
+        "title": "AI-powered Space Exploration"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Dr. Emily White",
+    "dept": "Department of Education",
+    "desc": "Using AI to enhance online learning experiences.",
+    "papers": [
+      {
+        "id": 0,
+        "title": "AI-powered Personalized Learning Platforms"
+      },
+      {
+        "id": 1,
+        "title": "Using Chatbots in Online Education"
+      },
+      {
+        "id": 2,
+        "title": "Machine Learning for Student Performance Prediction"
+      },
+      {
+        "id": 3,
+        "title": "AI-driven Automated Grading Systems"
+      }
+    ]
   },
   {
     "id": 2,
@@ -103,73 +103,26 @@
     ]
   },
   {
-    "id": 12,
-    "name": "Dr. Just Added",
-    "dept": "Testing Adds",
-    "desc": "Lorem ipsum.",
-    "papers": []
-  },
-  {
-    "id": 0,
-    "name": "Dr. Foo Bar",
-    "dept": "Department of Computer Science",
-    "desc": "Testing to see if this can be changed.",
+    "id": 6,
+    "name": "Dr. William Anderson",
+    "dept": "Department of Medicine",
+    "desc": "Applying deep learning to medical imaging.",
     "papers": [
       {
         "id": 0,
-        "title": "Machine Learning for Research Discovery"
+        "title": "AI-assisted Cancer Detection in Radiology"
       },
       {
         "id": 1,
-        "title": "AI in Academic Collaboration"
+        "title": "Deep Learning for Drug Development"
       },
       {
         "id": 2,
-        "title": "Semantic Search in Research Papers"
+        "title": "AI-powered Personalized Medicine"
       },
       {
         "id": 3,
-        "title": "Deep Learning for Text Classification"
-      },
-      {
-        "id": 4,
-        "title": "Some test paper being added."
-      },
-      {
-        "id": 5,
-        "title": "Some test paper being added."
-      },
-      {
-        "id": 6,
-        "title": "Some test paper being added."
-      },
-      {
-        "id": 7,
-        "title": "Some test paper being added."
-      }
-    ]
-  },
-  {
-    "id": 4,
-    "name": "Dr. Ethan Taylor",
-    "dept": "Department of Humanities",
-    "desc": "Investigating AI's role in creative industries.",
-    "papers": [
-      {
-        "id": 0,
-        "title": "Natural Language Processing in Literature"
-      },
-      {
-        "id": 1,
-        "title": "AI and Human Creativity"
-      },
-      {
-        "id": 2,
-        "title": "Automated Journalism and AI Ethics"
-      },
-      {
-        "id": 3,
-        "title": "AI-generated Art and Copyright Issues"
+        "title": "Predicting Disease Progression with AI"
       }
     ]
   },
@@ -222,54 +175,6 @@
     ]
   },
   {
-    "id": 10,
-    "name": "Dr. Daniel Harris",
-    "dept": "Department of Astronomy",
-    "desc": "Analyzing astronomical data using machine learning.",
-    "papers": [
-      {
-        "id": 0,
-        "title": "AI for Exoplanet Detection"
-      },
-      {
-        "id": 1,
-        "title": "Neural Networks in Astronomical Image Analysis"
-      },
-      {
-        "id": 2,
-        "title": "Predicting Cosmic Events with AI"
-      },
-      {
-        "id": 3,
-        "title": "AI-powered Space Exploration"
-      }
-    ]
-  },
-  {
-    "id": 7,
-    "name": "Dr. Emily White",
-    "dept": "Department of Education",
-    "desc": "Using AI to enhance online learning experiences.",
-    "papers": [
-      {
-        "id": 0,
-        "title": "AI-powered Personalized Learning Platforms"
-      },
-      {
-        "id": 1,
-        "title": "Using Chatbots in Online Education"
-      },
-      {
-        "id": 2,
-        "title": "Machine Learning for Student Performance Prediction"
-      },
-      {
-        "id": 3,
-        "title": "AI-driven Automated Grading Systems"
-      }
-    ]
-  },
-  {
     "id": 1,
     "name": "Dr. Alice Johnson",
     "dept": "Department of AI",
@@ -290,6 +195,94 @@
       {
         "id": 3,
         "title": "Transformers and Their Impact on NLP"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Dr. Ethan Taylor",
+    "dept": "Department of Humanities",
+    "desc": "Investigating AI's role in creative industries.",
+    "papers": [
+      {
+        "id": 0,
+        "title": "Natural Language Processing in Literature"
+      },
+      {
+        "id": 1,
+        "title": "AI and Human Creativity"
+      },
+      {
+        "id": 2,
+        "title": "Automated Journalism and AI Ethics"
+      },
+      {
+        "id": 3,
+        "title": "AI-generated Art and Copyright Issues"
+      }
+    ]
+  },
+  {
+    "id": 0,
+    "name": "Dr. Foo Bar",
+    "dept": "Department of Computer Science",
+    "desc": "Testing to see if this can be changed.",
+    "papers": [
+      {
+        "id": 0,
+        "title": "Machine Learning for Research Discovery"
+      },
+      {
+        "id": 1,
+        "title": "AI in Academic Collaboration"
+      },
+      {
+        "id": 2,
+        "title": "Semantic Search in Research Papers"
+      },
+      {
+        "id": 3,
+        "title": "Deep Learning for Text Classification"
+      },
+      {
+        "id": 4,
+        "title": "Some test paper being added."
+      },
+      {
+        "id": 5,
+        "title": "Some test paper being added."
+      },
+      {
+        "id": 6,
+        "title": "Some test paper being added."
+      },
+      {
+        "id": 7,
+        "title": "Some test paper being added."
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Dr. Olivia Brown",
+    "dept": "Department of Business",
+    "desc": "Studying AI's impact on market trends.",
+    "papers": [
+      {
+        "id": 0,
+        "title": "Machine Learning in Finance"
+      },
+      {
+        "id": 1,
+        "title": "Predictive Analytics for Stock Markets"
+      },
+      {
+        "id": 2,
+        "title": "AI and Consumer Behavior Trends"
+      },
+      {
+        "id": 3,
+        "title": "Supply Chain Optimization with AI"
       }
     ]
   }

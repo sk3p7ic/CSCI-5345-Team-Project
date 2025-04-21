@@ -31,7 +31,9 @@ pub async fn get_all_professors(data: RouteHandlerData<'static>) -> HttpResponse
         }
         Err(err) => {
             eprintln!("Error with RwLock (poisoned?): {err}");
-            HttpResponse::InternalServerError().body("Could not get list of professors.")
+            HttpResponse::InternalServerError().json(RouteResponseMessage::from(
+                "Could not get list of professors.",
+            ))
         }
     }
 }
@@ -71,7 +73,8 @@ pub async fn add_professor(
         }
         Err(err) => {
             eprintln!("Error with RwLock (poisoned?): {err}");
-            HttpResponse::InternalServerError().body("Could not add professor.")
+            HttpResponse::InternalServerError()
+                .json(RouteResponseMessage::from("Could not add professor."))
         }
     }
 }
@@ -88,12 +91,14 @@ pub async fn get_professor(
             if let Some(professor) = data.0.get(&prof_id) {
                 HttpResponse::Ok().json(professor)
             } else {
-                HttpResponse::NotFound().body("Professor not found.")
+                HttpResponse::NotFound().json(RouteResponseMessage::from("Professor not found."))
             }
         }
         Err(err) => {
             eprintln!("Error with RwLock (poisoned?): {err}");
-            HttpResponse::InternalServerError().body("Could not get list of professors.")
+            HttpResponse::InternalServerError().json(RouteResponseMessage::from(
+                "Could not get list of professors.",
+            ))
         }
     }
 }
@@ -124,12 +129,13 @@ pub async fn edit_professor(
                 }
                 res
             } else {
-                HttpResponse::NotFound().body("Professor not found.")
+                HttpResponse::NotFound().json(RouteResponseMessage::from("Professor not found."))
             }
         }
         Err(err) => {
             eprintln!("Error with RwLock (poisoned?): {err}");
-            HttpResponse::InternalServerError().body("Could not edit professor.")
+            HttpResponse::InternalServerError()
+                .json(RouteResponseMessage::from("Could not edit professor."))
         }
     }
 }
@@ -143,7 +149,8 @@ pub async fn delete_professor(
     match data.write() {
         Ok(mut data) => {
             if data.0.remove(&prof_id).is_none() {
-                return HttpResponse::NotFound().body("Professor not found.");
+                return HttpResponse::NotFound()
+                    .json(RouteResponseMessage::from("Professor not found."));
             }
             match data.save_state() {
                 Ok(_) => HttpResponse::NoContent().json(RouteResponseMessage::from(
@@ -156,7 +163,8 @@ pub async fn delete_professor(
         }
         Err(err) => {
             eprintln!("Error with RwLock (poisoned?): {err}");
-            HttpResponse::InternalServerError().body("Could not delete professor.")
+            HttpResponse::InternalServerError()
+                .json(RouteResponseMessage::from("Could not delete professor."))
         }
     }
 }
@@ -169,12 +177,13 @@ pub async fn get_papers(params: WebPath<(u32,)>, data: RouteHandlerData<'static>
             if let Some(professor) = data.0.get(&prof_id) {
                 HttpResponse::Ok().json(professor.papers.clone())
             } else {
-                HttpResponse::NotFound().body("Professor not found.")
+                HttpResponse::NotFound().json(RouteResponseMessage::from("Professor not found."))
             }
         }
         Err(err) => {
             eprintln!("Error with RwLock (poisoned?): {err}");
-            HttpResponse::InternalServerError().body("Could not get papers.")
+            HttpResponse::InternalServerError()
+                .json(RouteResponseMessage::from("Could not get papers."))
         }
     }
 }
@@ -201,19 +210,21 @@ pub async fn add_paper(
                 });
                 let res = match professor.papers.iter().last() {
                     Some(paper) => HttpResponse::Ok().json(paper),
-                    None => HttpResponse::InternalServerError().body("Could not get added paper."),
+                    None => HttpResponse::InternalServerError()
+                        .json(RouteResponseMessage::from("Could not get added paper.")),
                 };
                 if let Err(err) = data.save_state() {
                     eprintln!("Could not save data state: {err}");
                 }
                 res
             } else {
-                HttpResponse::BadRequest().body("Professor not found.")
+                HttpResponse::BadRequest().json(RouteResponseMessage::from("Professor not found."))
             }
         }
         Err(err) => {
             eprintln!("Error with RwLock (poisoned?): {err}");
-            HttpResponse::InternalServerError().body("Could not add paper.")
+            HttpResponse::InternalServerError()
+                .json(RouteResponseMessage::from("Could not add paper."))
         }
     }
 }
@@ -245,15 +256,16 @@ pub async fn edit_paper(
                     }
                     res
                 } else {
-                    HttpResponse::NotFound().body("Paper not found.")
+                    HttpResponse::NotFound().json(RouteResponseMessage::from("Paper not found."))
                 }
             } else {
-                HttpResponse::NotFound().body("Professor not found.")
+                HttpResponse::NotFound().json(RouteResponseMessage::from("Professor not found."))
             }
         }
         Err(err) => {
             eprintln!("Error with RwLock (poisoned?): {err}");
-            HttpResponse::InternalServerError().body("Could not edit paper.")
+            HttpResponse::InternalServerError()
+                .json(RouteResponseMessage::from("Could not edit paper."))
         }
     }
 }
@@ -288,12 +300,13 @@ pub async fn delete_paper(
                     )),
                 }
             } else {
-                HttpResponse::NotFound().body("Professor not found.")
+                HttpResponse::NotFound().json(RouteResponseMessage::from("Professor not found."))
             }
         }
         Err(err) => {
             eprintln!("Error with RwLock (poisoned?): {err}");
-            HttpResponse::InternalServerError().body("Could not delete paper.")
+            HttpResponse::InternalServerError()
+                .json(RouteResponseMessage::from("Could not delete paper."))
         }
     }
 }

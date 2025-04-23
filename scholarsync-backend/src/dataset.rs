@@ -2,6 +2,8 @@ use std::{collections::HashMap, io::Write};
 
 use serde::{Deserialize, Serialize};
 
+use crate::chatgpt::ModelRequest;
+
 /// Contains information about a `Paper` authored by a `Professor`.
 #[derive(Deserialize, Serialize, Clone)]
 pub struct Paper {
@@ -17,6 +19,20 @@ pub struct Professor {
     pub dept: String,
     pub desc: String,
     pub papers: Vec<Paper>,
+}
+
+impl Professor {
+    pub async fn generate_description(&mut self) -> Result<String, String> {
+        let papers = self
+            .papers
+            .iter()
+            .map(|p| p.title.as_str())
+            .collect::<Vec<_>>()
+            .join("\n");
+        let desc = ModelRequest(papers).make().await?;
+        self.desc = desc.clone();
+        Ok(desc)
+    }
 }
 
 /// Stores `Professor`s, indexed by each of their IDs.

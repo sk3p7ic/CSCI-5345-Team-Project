@@ -3,14 +3,16 @@ use std::sync::RwLock;
 use actix_web::{App, HttpServer, web::Data};
 use routes::{
     RouteHandlerData, add_paper, add_professor, delete_paper, delete_professor, edit_professor,
-    get_all_professors, get_papers, get_professor,
+    get_all_professors, get_description, get_papers, get_professor,
 };
 
+mod chatgpt;
 mod dataset;
 mod routes;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
+    dotenv::dotenv().expect("Cannot get .env variables");
     let data: RouteHandlerData = Data::new(RwLock::new(dataset::load_dataset("data.json")));
 
     HttpServer::new(move || {
@@ -24,6 +26,7 @@ async fn main() -> std::io::Result<()> {
             .service(get_papers)
             .service(add_paper)
             .service(delete_paper)
+            .service(get_description)
     })
     .bind(("0.0.0.0", 8080))?
     .run()

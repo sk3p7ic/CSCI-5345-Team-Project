@@ -107,10 +107,9 @@ pub async fn get_professor(
 struct EditProfessorProps {
     name: String,
     dept: String,
-    desc: String,
 }
 
-#[actix_web::put("/api/professors/{prof_id}")]
+#[actix_web::patch("/api/professors/{prof_id}")]
 pub async fn edit_professor(
     params: WebPath<(u32,)>,
     form_body: Json<EditProfessorProps>,
@@ -122,14 +121,22 @@ pub async fn edit_professor(
             if let Some(professor) = data.0.get_mut(&prof_id) {
                 professor.name = form_body.name.to_owned();
                 professor.dept = form_body.dept.to_owned();
-                professor.desc = form_body.desc.to_owned();
-                let res = HttpResponse::Ok().json(professor);
-                if let Err(err) = data.save_state() {
-                    eprintln!("Could not save data state: {err}");
-                }
-                res
             } else {
-                HttpResponse::NotFound().json(RouteResponseMessage::from("Professor not found."))
+                return HttpResponse::NotFound()
+                    .json(RouteResponseMessage::from("Professor not found."));
+            }
+            match data.save_state() {
+                Ok(()) => match data.0.get(&prof_id) {
+                    Some(professor) => HttpResponse::Ok().json(professor),
+                    None => HttpResponse::NotFound()
+                        .json(RouteResponseMessage::from("Professor not found.")),
+                },
+                Err(err) => {
+                    eprintln!("Could not save data state: {err}");
+                    HttpResponse::Accepted().json(RouteResponseMessage::from(
+                        "Professor was edited in memory, but the edit has not been committed.",
+                    ))
+                }
             }
         }
         Err(err) => {
@@ -304,6 +311,47 @@ pub async fn delete_paper(
             eprintln!("Error with RwLock (poisoned?): {err}");
             HttpResponse::InternalServerError()
                 .json(RouteResponseMessage::from("Could not delete paper."))
+        }
+    }
+}
+
+#[derive(Serialize)]
+struct ProfessorDescription {
+    description: String,
+}
+
+#[actix_web::get("/api/professors/{prof_id}/description")]
+pub async fn get_description(
+    params: WebPath<(u32,)>,
+    data: RouteHandlerData<'static>,
+) -> HttpResponse {
+    let (prof_id,) = params.into_inner();
+    match data.write() {
+        Ok(mut data) => {
+            if let Some(professor) = data.0.get_mut(&prof_id) {
+                let description = match professor.generate_description().await {
+                    Ok(desc) => desc,
+                    Err(err) => {
+                        eprintln!("Error generating description: {err}");
+                        return HttpResponse::InternalServerError()
+                            .json(RouteResponseMessage::from("An error occurred."));
+                    }
+                };
+                match data.save_state() {
+                    Ok(_) => HttpResponse::Ok().json(ProfessorDescription { description }),
+                    Err(_) => HttpResponse::Accepted().json(RouteResponseMessage::from(
+                        "Description was saved in memory but has not yet been committed.",
+                    )),
+                }
+            } else {
+                HttpResponse::NotFound().json(RouteResponseMessage::from("Professor not found."))
+            }
+        }
+        Err(err) => {
+            eprintln!("Error with RwLock (poisoned?): {err}");
+            HttpResponse::InternalServerError().json(RouteResponseMessage::from(
+                "Could not get professor description.",
+            ))
         }
     }
 }

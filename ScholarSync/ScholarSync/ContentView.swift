@@ -2,16 +2,15 @@ import SwiftUI
 
 struct ContentView: View {
     @AppStorage("isLoggedIn") private var isLoggedIn: Bool = false
+    @StateObject private var dataManager = DataManager()
     @State private var showProfileSheet = false
     @State private var searchText = ""
-    let profile = myProfile
-    let professors = testData.professors
 
     var filteredProfessors: [Professor] {
         if searchText.isEmpty {
-            return professors
+            return dataManager.professors
         }
-        return professors.filter { professor in
+        return dataManager.professors.filter { professor in
             professor.name.localizedCaseInsensitiveContains(searchText) ||
             professor.dept.localizedCaseInsensitiveContains(searchText) ||
             professor.papers.contains { paper in
@@ -124,6 +123,9 @@ struct ContentView: View {
                 ProfileView()
             }
             .background(Color(.systemGroupedBackground))
+            .onAppear {
+                dataManager.fetchData()
+            }
         }
     }
 }

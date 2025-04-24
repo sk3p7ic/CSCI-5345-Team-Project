@@ -1,53 +1,5 @@
 [
   {
-    "id": 9,
-    "name": "Dr. Victoria Wilson",
-    "dept": "Department of Robotics",
-    "desc": "Building AI-powered robotic systems.",
-    "papers": [
-      {
-        "id": 0,
-        "title": "Autonomous Robots and AI"
-      },
-      {
-        "id": 1,
-        "title": "Reinforcement Learning in Robotics"
-      },
-      {
-        "id": 2,
-        "title": "Human-Robot Interaction with AI"
-      },
-      {
-        "id": 3,
-        "title": "AI-driven Robotic Surgery"
-      }
-    ]
-  },
-  {
-    "id": 1,
-    "name": "Dr. Alice Johnson",
-    "dept": "Department of AI",
-    "desc": "Exploring neural networks and their applications in academia.",
-    "papers": [
-      {
-        "id": 0,
-        "title": "Neural Networks for Academic Matching"
-      },
-      {
-        "id": 1,
-        "title": "AI-powered Citation Analysis"
-      },
-      {
-        "id": 2,
-        "title": "Automated Research Paper Summarization"
-      },
-      {
-        "id": 3,
-        "title": "Transformers and Their Impact on NLP"
-      }
-    ]
-  },
-  {
     "id": 7,
     "name": "Dr. Emily White",
     "dept": "Department of Education",
@@ -96,149 +48,6 @@
     ]
   },
   {
-    "id": 4,
-    "name": "Dr. Ethan Taylor",
-    "dept": "Department of Humanities",
-    "desc": "Investigating AI's role in creative industries.",
-    "papers": [
-      {
-        "id": 0,
-        "title": "Natural Language Processing in Literature"
-      },
-      {
-        "id": 1,
-        "title": "AI and Human Creativity"
-      },
-      {
-        "id": 2,
-        "title": "Automated Journalism and AI Ethics"
-      },
-      {
-        "id": 3,
-        "title": "AI-generated Art and Copyright Issues"
-      }
-    ]
-  },
-  {
-    "id": 11,
-    "name": "Dr. Just Added",
-    "dept": "Testing Adds",
-    "desc": "Lorem ipsum.",
-    "papers": []
-  },
-  {
-    "id": 6,
-    "name": "Dr. William Anderson",
-    "dept": "Department of Medicine",
-    "desc": "Applying deep learning to medical imaging.",
-    "papers": [
-      {
-        "id": 0,
-        "title": "AI-assisted Cancer Detection in Radiology"
-      },
-      {
-        "id": 1,
-        "title": "Deep Learning for Drug Development"
-      },
-      {
-        "id": 2,
-        "title": "AI-powered Personalized Medicine"
-      },
-      {
-        "id": 3,
-        "title": "Predicting Disease Progression with AI"
-      }
-    ]
-  },
-  {
-    "id": 3,
-    "name": "Dr. Olivia Brown",
-    "dept": "Department of Business",
-    "desc": "Studying AI's impact on market trends.",
-    "papers": [
-      {
-        "id": 0,
-        "title": "Machine Learning in Finance"
-      },
-      {
-        "id": 1,
-        "title": "Predictive Analytics for Stock Markets"
-      },
-      {
-        "id": 2,
-        "title": "AI and Consumer Behavior Trends"
-      },
-      {
-        "id": 3,
-        "title": "Supply Chain Optimization with AI"
-      }
-    ]
-  },
-  {
-    "id": 8,
-    "name": "Dr. Benjamin Carter",
-    "dept": "Department of Cybersecurity",
-    "desc": "AI applications in cybersecurity and threat detection.",
-    "papers": [
-      {
-        "id": 0,
-        "title": "Machine Learning for Cyber Threat Detection"
-      },
-      {
-        "id": 1,
-        "title": "Deepfake Detection using AI"
-      },
-      {
-        "id": 2,
-        "title": "AI-driven Phishing Detection"
-      },
-      {
-        "id": 3,
-        "title": "Privacy-Preserving Machine Learning Models"
-      }
-    ]
-  },
-  {
-    "id": 0,
-    "name": "Dr. Foo Bar",
-    "dept": "Department of Computer Science",
-    "desc": "Testing to see if this can be changed.",
-    "papers": [
-      {
-        "id": 0,
-        "title": "Machine Learning for Research Discovery"
-      },
-      {
-        "id": 1,
-        "title": "AI in Academic Collaboration"
-      },
-      {
-        "id": 2,
-        "title": "Semantic Search in Research Papers"
-      },
-      {
-        "id": 3,
-        "title": "Deep Learning for Text Classification"
-      },
-      {
-        "id": 4,
-        "title": "Some test paper being added."
-      },
-      {
-        "id": 5,
-        "title": "Some test paper being added."
-      },
-      {
-        "id": 6,
-        "title": "Some test paper being added."
-      },
-      {
-        "id": 7,
-        "title": "Some test paper being added."
-      }
-    ]
-  },
-  {
     "id": 10,
     "name": "Dr. Daniel Harris",
     "dept": "Department of Astronomy",
@@ -263,26 +72,26 @@
     ]
   },
   {
-    "id": 5,
-    "name": "Dr. Sophia Martinez",
-    "dept": "Department of Physics",
-    "desc": "Using AI for quantum mechanics research.",
+    "id": 1,
+    "name": "Dr. Alice Johnson",
+    "dept": "Department of AI",
+    "desc": "Exploring neural networks and their applications in academia.",
     "papers": [
       {
         "id": 0,
-        "title": "Quantum Computing with AI"
+        "title": "Neural Networks for Academic Matching"
       },
       {
         "id": 1,
-        "title": "Simulating Quantum Particles with Machine Learning"
+        "title": "AI-powered Citation Analysis"
       },
       {
         "id": 2,
-        "title": "AI and Particle Physics"
+        "title": "Automated Research Paper Summarization"
       },
       {
         "id": 3,
-        "title": "Superconductors and AI-based Prediction Models"
+        "title": "Transformers and Their Impact on NLP"
       }
     ]
   }
